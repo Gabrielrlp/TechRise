@@ -1,70 +1,70 @@
-    body {
-      font-family: 'Times New Roman', sans-serif;
-      background-color: #cfadfc;
-      margin: 0;
-      padding: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
-    }
+body {
+  font-family: "Times New Roman", sans-serif;
+  background-color: #cfadfc;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
 
-    .cadastro-container {
-      background-color: white;
-      padding: 40px 30px;
-      border-radius: 20px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-      width: 350px;
-      text-align: center;
-    }
+.cadastro-container {
+  background-color: white;
+  padding: 40px 30px;
+  border-radius: 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  width: 350px;
+  text-align: center;
+}
 
-    .cadastro-container h1 {
-      margin-bottom: 10px;
-      color: #6a2e8f;
-      font-size: 2em;
-    }
+.cadastro-container h1 {
+  margin-bottom: 10px;
+  color: #6a2e8f;
+  font-size: 2em;
+}
 
-    .cadastro-container p {
-      margin-bottom: 25px;
-      font-size: 1.1em;
-      color: #333;
-    }
+.cadastro-container p {
+  margin-bottom: 25px;
+  font-size: 1.1em;
+  color: #333;
+}
 
-    .cadastro-container input {
-      width: 100%;
-      padding: 12px;
-      margin-bottom: 15px;
-      border-radius: 10px;
-      border: 1px solid #ccc;
-      font-size: 1em;
-      font-family: 'Times New Roman', sans-serif;
-    }
+.cadastro-container input {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 15px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  font-size: 1em;
+  font-family: "Times New Roman", sans-serif;
+}
 
-    .cadastro-container button {
-      background-color: #6a2e8f;
-      color: white;
-      border: none;
-      padding: 12px;
-      width: 100%;
-      border-radius: 10px;
-      font-size: 1em;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-      font-family: 'Times New Roman', sans-serif;
-    }
+.cadastro-container button {
+  background-color: #6a2e8f;
+  color: white;
+  border: none;
+  padding: 12px;
+  width: 100%;
+  border-radius: 10px;
+  font-size: 1em;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  font-family: "Times New Roman", sans-serif;
+}
 
-    .cadastro-container button:hover {
-      background-color: #551f72;
-    }
+.cadastro-container button:hover {
+  background-color: #551f72;
+}
 
-    .cadastro-container a {
-      display: inline-block;
-      margin-top: 15px;
-      color: #6a2e8f;
-      text-decoration: none;
-      font-size: 0.9em;
-    }
+.cadastro-container a {
+  display: inline-block;
+  margin-top: 15px;
+  color: #6a2e8f;
+  text-decoration: none;
+  font-size: 0.9em;
+}
 
-    .cadastro-container a:hover {
-      text-decoration: underline;
-    }
+.cadastro-container a:hover {
+  text-decoration: underline;
+}

@@ -1,28 +1,35 @@
-      function buscarLivros() {
-            const termo = document.getElementById('searchInput').value.toLowerCase();
-            const livros = document.querySelectorAll('.book-item');
+function buscarLivros() {
+  const termo = document.getElementById("searchInput").value.toLowerCase();
+  const livros = document.querySelectorAll(".book-item");
 
-            livros.forEach((livro) => {
-                const titulo = livro.querySelector('h2').textContent.toLowerCase();
-                const descricao = livro.querySelector('p').textContent.toLowerCase();
+  livros.forEach((livro) => {
+    const titulo = livro.querySelector("h2").textContent.toLowerCase();
+    const descricao = livro.querySelector("p").textContent.toLowerCase();
 
-                if (titulo.includes(termo) || descricao.includes(termo)) {
-                    livro.style.display = 'block';
-                } else {
-                    livro.style.display = 'none';
-                }
-            });
-        }
+    if (titulo.includes(termo) || descricao.includes(termo)) {
+      livro.style.display = "block";
+    } else {
+      livro.style.display = "none";
+    }
+  });
+}
 
-        function limparBusca() {
-            document.getElementById('searchInput').value = '';
-            const livros = document.querySelectorAll('.book-item');
-            livros.forEach((livro) => (livro.style.display = 'block'));
-        }
+function limparBusca() {
+  document.getElementById("searchInput").value = "";
+  const livros = document.querySelectorAll(".book-item");
+  livros.forEach((livro) => (livro.style.display = "block"));
+}
 
-        function alternarTema() {
+function alternarTema() {
+  document.body.classList.toggle("dark-mode");
 
-  document.body.classList.toggle('dark-mode');
+  const btn = document.querySelector(".tema-button");
+
+  if (btn) {
+    btn.textContent = document.body.classList.contains("dark-mode")
+      ? "☀️ Claro"
+      : "🌙 Tema";
+  }
 }
 
 window.onscroll = function () {
@@ -32,49 +39,66 @@ window.onscroll = function () {
 function topo() {
   document.documentElement.scrollTop = 0;
 }
-  function filtrarCategoria() {
-    const categoriaSelecionada = document.getElementById("filtroCategoria").value;
-    const livros = document.querySelectorAll(".book-item");
+function filtrarCategoria() {
+  const categoriaSelecionada = document.getElementById("filtroCategoria").value;
+  const livros = document.querySelectorAll(".book-item");
 
-    livros.forEach((livro) => {
-      const categoria = livro.getAttribute("data-categoria");
-      if (categoriaSelecionada === "todos" || categoria === categoriaSelecionada) {
-        livro.style.display = "block";
-      } else {
-        livro.style.display = "none";
-      }
-    });
-  }
+  livros.forEach((livro) => {
+    const categoria = livro.getAttribute("data-categoria");
+    if (
+      categoriaSelecionada === "todos" ||
+      categoria === categoriaSelecionada
+    ) {
+      livro.style.display = "block";
+    } else {
+      livro.style.display = "none";
+    }
+  });
+}
 
 function marcarFavorito(botao) {
-    const livro = botao.closest('.book-item');
-    livro.classList.toggle('favorito');
+  const livro = botao.closest(".book-item");
+
+  livro.classList.toggle("favorito");
+  botao.classList.toggle("ativo");
+
+  botao.querySelector(".texto").textContent =
+    botao.classList.contains("ativo") ? "Favoritado" : "Favoritar";
 }
 
 function marcarConcluido(botao) {
-    const livro = botao.closest('.book-item');
-    livro.classList.toggle('Concluido');
+  const livro = botao.closest(".book-item");
+
+  livro.classList.toggle("Concluido");
+  botao.classList.toggle("ativo");
+
+  botao.querySelector(".texto").textContent =
+    botao.classList.contains("ativo") ? "Lido" : "Concluído";
 }
 
 function mostrarDestaques() {
-    const livros = document.querySelectorAll(".book-item");
-    livros.forEach((livro) => {
-        const destaque = livro.getAttribute("data-destaque");
-        livro.style.display = destaque === "true" ? "block" : "none";
-    });
+  const livros = document.querySelectorAll(".book-item");
+  livros.forEach((livro) => {
+    const destaque = livro.getAttribute("data-destaque");
+    livro.style.display = destaque === "true" ? "block" : "none";
+  });
 }
 function mostrarFavoritos() {
-    const livros = document.querySelectorAll(".book-item");
-    livros.forEach((livro) => {
-        livro.style.display = livro.classList.contains("favorito") ? "block" : "none";
-    });
+  const livros = document.querySelectorAll(".book-item");
+  livros.forEach((livro) => {
+    livro.style.display = livro.classList.contains("favorito")
+      ? "block"
+      : "none";
+  });
 }
 
 function mostrarConcluido() {
-    const livros = document.querySelectorAll(".book-item");
-    livros.forEach((livro) => {
-        livro.style.display = livro.classList.contains("Concluido") ? "block" : "none";
-    });
+  const livros = document.querySelectorAll(".book-item");
+  livros.forEach((livro) => {
+    livro.style.display = livro.classList.contains("Concluido")
+      ? "block"
+      : "none";
+  });
 }
 
 function mostrarSugestoes() {

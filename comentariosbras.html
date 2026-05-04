@@ -1,35 +1,35 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Anotações Brás Cubas</title>
-    <link rel="stylesheet" href="comentariosbras.css">
+    <link rel="stylesheet" href="comentariosbras.css" />
+  </head>
+  <body>
+    <header>
+      <h1 id="tituloCapitulo">Anotações</h1>
+    </header>
 
-</head>
-<body>
-
-<header>
-    <h1 id="tituloCapitulo">Anotações</h1>
-</header>
-
-<div class="container">
-    <div class="note-box">
+    <div class="container">
+      <div class="note-box">
         <label for="anotacao">Sua anotação:</label>
-        <textarea id="anotacao" placeholder="Escreva suas notas aqui..."></textarea>
-        <br>
+        <textarea
+          id="anotacao"
+          placeholder="Escreva suas notas aqui..."
+        ></textarea>
+        <br />
         <button onclick="salvarAnotacao()">Salvar</button>
         <button onclick="voltar()">Voltar</button>
+      </div>
+
+      <div id="listaAnotacoes" class="notes-list"></div>
     </div>
 
-    <div id="listaAnotacoes" class="notes-list"></div>
-</div>
+    <footer>
+      <p>TechRise - Área de Anotações</p>
+    </footer>
 
-<footer>
-    <p>TechRise - Área de Anotações</p>
-</footer>
-
-<script src="comentariosbras.js"></script>
-
-</body>
+    <script src="comentariosbras.js"></script>
+  </body>
 </html>

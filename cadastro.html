@@ -1,25 +1,24 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-br">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Cadastro - BookRise</title>
- ><link rel="stylesheet" href="cadastro.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cadastro - BookRise</title>
+    >
+    <link rel="stylesheet" href="cadastro.css" />
+  </head>
+  <body>
+    <div class="cadastro-container">
+      <h1>BookRise</h1>
+      <p>Cadastre-se para acessar o conteúdo</p>
+      <input type="text" id="novoUsuario" placeholder="Usuário" />
+      <input type="email" id="novoEmail" placeholder="Email" />
+      <input type="password" id="novaSenha" placeholder="Senha" />
+      <button onclick="cadastrarUsuario()">Cadastrar</button>
 
-</head>
-<body>
-  <div class="cadastro-container">
-    <h1>BookRise</h1>
-    <p>Cadastre-se para acessar o conteúdo</p>
-    <input type="text" id="novoUsuario" placeholder="Usuário" />
-    <input type="email" id="novoEmail" placeholder="Email" />
-    <input type="password" id="novaSenha" placeholder="Senha" />
-    <button onclick="cadastrarUsuario()">Cadastrar</button>
+      <a href="login.html">Já tem conta? Fazer login</a>
+    </div>
 
-    <a href="login.html">Já tem conta? Fazer login</a>
-  </div>
-
-  <script src="cadastro.js"></script>
-
-</body>
+    <script src="cadastro.js"></script>
+  </body>
 </html>

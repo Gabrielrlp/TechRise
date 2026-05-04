@@ -1,253 +1,528 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>BookRise</title>
-    <link rel="stylesheet" href="index.css">
+  <!doctype html>
+  <html lang="pt-br">
+    <head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1" />
+      <title>BookRise</title>
+      <link rel="stylesheet" href="index.css" />
+    </head>
+    <body>
+      <header>
+        <button class="tema-button" onclick="alternarTema()">🌙 Tema</button> 
 
-</head>
-<body>
-  <header>
+        <div style="position: relative">
+          <img src="techrise-logo.png" alt="Logo" />
 
-    <button class="tema-button" onclick="alternarTema()">🌙 Tema</button>
+          <a href="cadastro.html" class="login-button">Cadastro</a>
+        </div>
 
-    <div style="position: relative;">
+        <h1>BookRise</h1>
+        <p>Leia quando quiser, onde quiser!</p>
+        <nav>
+          <button onclick="limparBusca()">Todos</button>
+  <button onclick="mostrarDestaques()">Destaques</button>
+  <button onclick="mostrarFavoritos()">Favoritos</button>
+  <button onclick="mostrarConcluido()">Livros Concluídos</button>
+        </nav>
 
-        <img src="techrise-logo.png" alt="Logo"/>
+        <div class="filter-bar">
+          <label for="filtroCategoria">Filtrar por categoria:</label>
+          <select
+            id="filtroCategoria"
+            onchange="filtrarCategoria()"
+            aria-label="Filtro de categorias de livros"
+          >
+            <option value="todos">Todos</option>
+            <option value="romance">Romance</option>
+            <option value="drama">Drama</option>
+            <option value="aventura">Aventura</option>
+            <option value="realismo">Realismo</option>
+          </select>
+        </div>
+      </header>
 
-        <button class="login-button">cadastro</button>
-    
-        <a href="cadastro.html" class="login-button">Cadastro</a>
-    </div>
+      <div class="container">
+        <div class="search-bar">
+          <input
+            type="text"
+            id="searchInput"
+            placeholder="Buscar livros..."
+            oninput="mostrarSugestoes()"
+            onkeydown="
+              if (event.key === 'Enter') {
+                buscarLivros();
+              }
+            "
+            autocomplete="off"
+          />
+          <button onclick="buscarLivros()">Buscar</button>
+          <button onclick="limparBusca()">Limpar</button>
+          <button id="btnTopo" onclick="topo()" aria-label="Voltar ao topo">
+            ↑
+          </button>
 
-    <h1>BookRise</h1>
-    <p>Leia quando quiser, onde quiser!</p>
-    <nav>
-      <a href="#" onclick="limparBusca()">Todos</a>
-      <a href="#" onclick="mostrarDestaques()">Destaques</a>
-      <a href="#" onclick="mostrarFavoritos()">Favoritos</a>
-      <a href="#" onclick="mostrarConcluido()">Livros Concluidos</a>
-    </nav>
-
-    <div class="filter-bar">
-        <label for="filtroCategoria">Filtrar por categoria:</label>
-        <select id="filtroCategoria" onchange="filtrarCategoria()" aria-label="Filtro de categorias de livros">
-          <option value="todos">Todos</option>
-          <option value="romance">Romance</option>
-          <option value="drama">Drama</option>
-          <option value="aventura">Aventura</option>
-          <option value="realismo">Realismo</option>
-        </select>
-      </div>
-      
-</header>
-
-    <div class="container">
-      <div class="search-bar">
-        <input
-          type="text"
-          id="searchInput"
-          placeholder="Buscar livros..."
-          oninput="mostrarSugestoes()"
-          onkeydown="if(event.key === 'Enter'){ buscarLivros(); }"
-          autocomplete="off"
-        />
-        <button onclick="buscarLivros()">Buscar</button>
-        <button onclick="limparBusca()">Limpar</button>
-        <button id="btnTopo" onclick="topo()" aria-label="Voltar ao topo">↑</button>
-
-        <div id="sugestoes" class="sugestoes-lista"></div>
+          <div id="sugestoes" class="sugestoes-lista"></div>
         </div>
 
         <div class="book-list" id="bookList">
- 
-            <div class="book-item" data-categoria="romance" data-destaque="true">
-                <h2>Dom Casmurro</h2>
-                <p>Um dos maiores romances da literatura brasileira, que explora temas como ciúmes e dúvidas.</p>
-                <a href="domcasmurro.html" target="_blank">
-                  <img src="https://images.tcdn.com.br/img/img_prod/1271663/dom_casmurro_edicao_de_luxo_almofadada_89_1_038fb70c564eb50f71ea49f6027e827a.jpg" alt="Capa do livro" />
-                </a>
-                <button class="favorito-btn" onclick="marcarFavorito(this)" aria-label="Adicionar aos favoritos">⭐</button>
-                <button class="favorito-btn" onclick="marcarConcluido(this)" aria-label="Adicionar aos favoritos">✅</button>
-              </div>
-              
-              <div class="book-item" data-categoria="drama" data-destaque="true">
-                <h2>Memórias Póstumas de Brás Cubas</h2>
-                <p>Narrado por um defunto, é uma crítica irônica à sociedade da época.</p>
-                <a href="brascubas.html" target="_blank">
-                  <img src="https://m.media-amazon.com/images/I/91RWiM+C-LL._UF894,1000_QL80_.jpg" alt="Capa do livro" />
-                </a>
-                <button class="favorito-btn" onclick="marcarFavorito(this)" aria-label="Adicionar aos favoritos">⭐</button>
-                <button class="favorito-btn" onclick="marcarConcluido(this)" aria-label="Adicionar aos favoritos">✅</button>
-              </div>
-              
-              <div class="book-item" data-categoria="aventura" data-destaque="true">
-                <h2>O cortiço</h2>
-                <p>Obra naturalista que retrata a vida em um cortiço carioca.</p>
-                <img src="https://corregofundo.mg.gov.br/wp-content/uploads/2017/11/picture-590.jpg" alt="Capa do livro" />
-                <button class="favorito-btn" onclick="marcarFavorito(this)" aria-label="Adicionar aos favoritos">⭐</button>
-                <button class="favorito-btn" onclick="marcarConcluido(this)" aria-label="Adicionar aos favoritos">✅</button>
-              </div>
-              
-              <div class="book-item" data-categoria="romance">
-                <h2>Iracema</h2>
-                <p>Romance indianista que idealiza a origem do povo brasileiro.</p>
-                <img src="https://m.media-amazon.com/images/I/71LCDi6E2oL.jpg" alt="Capa do livro" />
-                <button class="favorito-btn" onclick="marcarFavorito(this)" aria-label="Adicionar aos favoritos">⭐</button>
-                <button class="favorito-btn" onclick="marcarConcluido(this)" aria-label="Adicionar aos favoritos">✅</button>
-              </div>
-              
-              <div class="book-item" data-categoria="romance">
-                <h2>O Guarani</h2>
-                <p>Romance histórico que narra a história do índio Peri e sua relação com a família portuguesa.</p>
-                <img src="https://m.media-amazon.com/images/I/81LOsJFOhSL._UF1000,1000_QL80_.jpg" alt="Capa do livro" />
-                <button class="favorito-btn" onclick="marcarFavorito(this)" aria-label="Adicionar aos favoritos">⭐</button>
-                <button class="favorito-btn" onclick="marcarConcluido(this)" aria-label="Adicionar aos favoritos">✅</button>
-              </div>
-              
-              <div class="book-item" data-categoria="romance">
-                <h2>A Moreninha</h2>
-                <p>Um dos primeiros romances brasileiros, com tom romântico e juvenil.</p>
-                <img src="https://cdn.record.com.br/wp-content/uploads/2019/07/26024720/2986.jpeg" alt="Capa do livro" />
-                <button class="favorito-btn" onclick="marcarFavorito(this)" aria-label="Adicionar aos favoritos">⭐</button>
-                <button class="favorito-btn" onclick="marcarConcluido(this)" aria-label="Adicionar aos favoritos">✅</button>
-              </div>
-              
-              <div class="book-item" data-categoria="romance" data-destaque="true">
-                <h2>Orgulho e Preconceito</h2>
-                <p>Romance inglês sobre relações sociais e amor na era georgiana.</p>
-                <img src="https://m.media-amazon.com/images/I/719esIW3D7L.jpg" alt="Capa do livro" />
-                <button class="favorito-btn" onclick="marcarFavorito(this)" aria-label="Adicionar aos favoritos">⭐</button>
-                <button class="favorito-btn" onclick="marcarConcluido(this)" aria-label="Adicionar aos favoritos">✅</button>
-              </div>
-              
-              <div class="book-item" data-categoria="drama" data-destaque="true">
-                <h2>Os Miseráveis</h2>
-                <p>Obra épica sobre justiça, redenção e desigualdade social na França do século XIX.</p>
-                <img src="https://m.media-amazon.com/images/I/71toOGz+DYL._UF1000,1000_QL80_.jpg" alt="Capa do livro" />
-                <button class="favorito-btn" onclick="marcarFavorito(this)" aria-label="Adicionar aos favoritos">⭐</button>
-                <button class="favorito-btn" onclick="marcarConcluido(this)" aria-label="Adicionar aos favoritos">✅</button>
-              </div>
-              
-              <div class="book-item" data-categoria="drama" data-destaque="true">
-                <h2>Crime e Castigo</h2>
-                <p>Romance psicológico profundo sobre culpa e redenção.</p>
-                <img src="https://m.media-amazon.com/images/I/81+dpv22LGL._UF1000,1000_QL80_.jpg" alt="Capa do livro" />
-                <button class="favorito-btn" onclick="marcarFavorito(this)" aria-label="Adicionar aos favoritos">⭐</button>
-                <button class="favorito-btn" onclick="marcarConcluido(this)" aria-label="Adicionar aos favoritos">✅</button>
-              </div>
-              
-              <div class="book-item" data-categoria="realismo">
-                <h2>Frankenstein</h2>
-                <p>Um clássico do gótico e da ficção científica, com reflexões sobre ciência e ética.</p>
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTzl0lB8-nJTL6euVTM8AivdCicKWKEVtrPQw&s" alt="Capa do livro" />
-                <button class="favorito-btn" onclick="marcarFavorito(this)" aria-label="Adicionar aos favoritos">⭐</button>
-                <button class="favorito-btn" onclick="marcarConcluido(this)" aria-label="Adicionar aos favoritos">✅</button>
-              </div>
-              
-              <div class="book-item" data-categoria="romance" data-destaque="true">
-                <h2>Senhora</h2>
-                <p>Romance urbano que explora casamento por interesse, amor e redenção.</p>
-                <img src="https://m.media-amazon.com/images/I/711tJRe6LML.jpg" alt="Capa do livro" />
-                <button class="favorito-btn" onclick="marcarFavorito(this)" aria-label="Adicionar aos favoritos">⭐</button>
-                <button class="favorito-btn" onclick="marcarConcluido(this)" aria-label="Adicionar aos favoritos">✅</button>
-              </div>
-              
-              <div class="book-item" data-categoria="realismo">
-                <h2>Quincas Borba</h2>
-                <p>Continuação indireta de Memórias Póstumas, com críticas sociais e filosofia irônica.</p>
-                <img src="https://m.media-amazon.com/images/I/61Kt3d+mhuL.jpg" alt="Capa do livro" />
-                <button class="favorito-btn" onclick="marcarFavorito(this)" aria-label="Adicionar aos favoritos">⭐</button>
-                <button class="favorito-btn" onclick="marcarConcluido(this)" aria-label="Adicionar aos favoritos">✅</button>
-              </div>
-              
-              <div class="book-item" data-categoria="realismo">
-                <h2>Triste Fim de Policarpo Quaresma</h2>
-                <p>Crítica ao nacionalismo exagerado e à burocracia brasileira.</p>
-                <img src="https://m.media-amazon.com/images/I/71e5C8gV19L._UF1000,1000_QL80_.jpg" alt="Capa do livro" />
-                <button class="favorito-btn" onclick="marcarFavorito(this)" aria-label="Adicionar aos favoritos">⭐</button>
-                <button class="favorito-btn" onclick="marcarConcluido(this)" aria-label="Adicionar aos favoritos">✅</button>
-              </div>
-              
-              <div class="book-item" data-categoria="romance">
-                <h2>Lucíola</h2>
-                <p>Romance urbano que narra a história de uma cortesã com tom moral e religioso.</p>
-                <img src="https://m.media-amazon.com/images/I/617wC0u9UjL._UF1000,1000_QL80_.jpg" alt="Capa do livro" />
-                <button class="favorito-btn" onclick="marcarFavorito(this)" aria-label="Adicionar aos favoritos">⭐</button>
-                <button class="favorito-btn" onclick="marcarConcluido(this)" aria-label="Adicionar aos favoritos">✅</button>
-              </div>
-              
-              <div class="book-item" data-categoria="realismo">
-                <h2>Inocência</h2>
-                <p>Romance regionalista ambientado no interior do Brasil.</p>
-                <img src="https://m.media-amazon.com/images/I/81j8ocnADUL._UF1000,1000_QL80_.jpg" alt="Capa do livro" />
-                <button class="favorito-btn" onclick="marcarFavorito(this)" aria-label="Adicionar aos favoritos">⭐</button>
-                <button class="favorito-btn" onclick="marcarConcluido(this)" aria-label="Adicionar aos favoritos">✅</button>
-              </div>
-              
-              <div class="book-item" data-categoria="realismo" data-destaque="true">
-                <h2>O Retrato de Dorian Gray</h2>
-                <p>Uma reflexão sobre beleza, juventude e moralidade.</p>
-                <img src="https://m.media-amazon.com/images/I/91ZEEdj0cCL._UF1000,1000_QL80_.jpg" alt="Capa do livro" />
-                <button class="favorito-btn" onclick="marcarFavorito(this)" aria-label="Adicionar aos favoritos">⭐</button>
-                <button class="favorito-btn" onclick="marcarConcluido(this)" aria-label="Adicionar aos favoritos">✅</button>
-              </div>
-              
-              <div class="book-item" data-categoria="romance" data-destaque="true">
-                <h2>Drácula</h2>
-                <p>Um dos primeiros romances de terror moderno.</p>
-                <img src="https://m.media-amazon.com/images/I/61MgodE1s0L._UF1000,1000_QL80_.jpg" alt="Capa do livro" />
-                <button class="favorito-btn" onclick="marcarFavorito(this)" aria-label="Adicionar aos favoritos">⭐</button>
-                <button class="favorito-btn" onclick="marcarConcluido(this)" aria-label="Adicionar aos favoritos">✅</button>
-              </div>
-              
-              <div class="book-item" data-categoria="drama">
-                <h2>A Letra Escarlate</h2>
-                <p>Uma crítica social sobre adultério e puritanismo nos EUA do século XVII.</p>
-                <img src="https://a-static.mlcdn.com.br/1500x1500/livro-a-letra-escarlate-nathaniel-hawthorne/livrdavila/850520/e0ae9abcc0543742de62327a12f8817f.jpeg" alt="Capa do livro" />
-                <button class="favorito-btn" onclick="marcarFavorito(this)" aria-label="Adicionar aos favoritos">⭐</button>
-                <button class="favorito-btn" onclick="marcarConcluido(this)" aria-label="Adicionar aos favoritos">✅</button>
-              </div>
-              
-              <div class="book-item" data-categoria="aventura">
-                <h2>Os Três Mosqueteiros</h2>
-                <p>Aventura e amizade na França do século XVII.</p>
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQsd6Y1jTQIGixCv53q76F2d-JhcA8HCcRFWA&s" alt="Capa do livro" />
-                <button class="favorito-btn" onclick="marcarFavorito(this)" aria-label="Adicionar aos favoritos">⭐</button>
-                <button class="favorito-btn" onclick="marcarConcluido(this)" aria-label="Adicionar aos favoritos">✅</button>
-              </div>
-              
-              <div class="book-item" data-categoria="aventura">
-                <h2>A Volta ao Mundo em 80 Dias</h2>
-                <p>Romance de aventura e ficção científica.</p>
-                <img src="https://www.lpm.com.br/livros/imagens/volta_ao_mundo_em_80_dias_9788525433664_hd.jpg" alt="Capa do livro" />
-                <button class="favorito-btn" onclick="marcarFavorito(this)" aria-label="Adicionar aos favoritos">⭐</button>
-                <button class="favorito-btn" onclick="marcarConcluido(this)" aria-label="Adicionar aos favoritos">✅</button>
-              </div>
-        </div>
-    </div>
+          <div class="book-item" data-categoria="romance" data-destaque="true">
+            <h2>Dom Casmurro</h2>
+            <p>
+              Um dos maiores romances da literatura brasileira, que explora temas
+              como ciúmes e dúvidas.
+            </p>
+            <a href="domcasmurro.html" target="_blank">
+              <img
+                src="https://images.tcdn.com.br/img/img_prod/1271663/dom_casmurro_edicao_de_luxo_almofadada_89_1_038fb70c564eb50f71ea49f6027e827a.jpg"
+                alt="Capa do livro"
+              />
+            </a>
+            <div class="acoes">
+              <button class="btn favorito-btn" onclick="marcarFavorito(this)">
+                <span class="icon">⭐</span>
+                <span class="texto">Favoritar</span>
+              </button>
 
-    <footer>
+              <button class="btn concluido-btn" onclick="marcarConcluido(this)">
+                <span class="icon">✅</span>
+                <span class="texto">Concluído</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="book-item" data-categoria="drama" data-destaque="true">
+            <h2>Memórias Póstumas de Brás Cubas</h2>
+            <p>
+              Narrado por um defunto, é uma crítica irônica à sociedade da época.
+            </p>
+            <a href="brascubas.html" target="_blank">
+              <img
+                src="https://m.media-amazon.com/images/I/91RWiM+C-LL._UF894,1000_QL80_.jpg"
+                alt="Capa do livro"
+              />
+            </a>
+            <div class="acoes">
+              <button class="btn favorito-btn" onclick="marcarFavorito(this)">
+                <span class="icon">⭐</span>
+                <span class="texto">Favoritar</span>
+              </button>
+
+              <button class="btn concluido-btn" onclick="marcarConcluido(this)">
+                <span class="icon">✅</span>
+                <span class="texto">Concluído</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="book-item" data-categoria="aventura" data-destaque="true">
+            <h2>O cortiço</h2>
+            <p>Obra naturalista que retrata a vida em um cortiço carioca.</p>
+            <img src="https://corregofundo.mg.gov.br/wp-content/uploads/2017/11/picture-590.jpg" alt="Capa do livro"/>
+
+            <div class="acoes">
+              <button class="btn favorito-btn" onclick="marcarFavorito(this)">
+                <span class="icon">⭐</span>
+                <span class="texto">Favoritar</span>
+              </button>
+
+              <button class="btn concluido-btn" onclick="marcarConcluido(this)">
+                <span class="icon">✅</span>
+                <span class="texto">Concluído</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="book-item" data-categoria="romance">
+            <h2>Iracema</h2>
+            <p>Romance indianista que idealiza a origem do povo brasileiro.</p>
+            <img
+              src="https://m.media-amazon.com/images/I/71LCDi6E2oL.jpg"
+              alt="Capa do livro"
+            />
+            <div class="acoes">
+              <button class="btn favorito-btn" onclick="marcarFavorito(this)">
+                <span class="icon">⭐</span>
+                <span class="texto">Favoritar</span>
+              </button>
+
+              <button class="btn concluido-btn" onclick="marcarConcluido(this)">
+                <span class="icon">✅</span>
+                <span class="texto">Concluído</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="book-item" data-categoria="romance">
+            <h2>O Guarani</h2>
+            <p>
+              Romance histórico que narra a história do índio Peri e sua relação
+              com a família portuguesa.
+            </p>
+            <img
+              src="https://m.media-amazon.com/images/I/81LOsJFOhSL._UF1000,1000_QL80_.jpg"
+              alt="Capa do livro"
+            />
+            <div class="acoes">
+              <button class="btn favorito-btn" onclick="marcarFavorito(this)">
+                <span class="icon">⭐</span>
+                <span class="texto">Favoritar</span>
+              </button>
+
+              <button class="btn concluido-btn" onclick="marcarConcluido(this)">
+                <span class="icon">✅</span>
+                <span class="texto">Concluído</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="book-item" data-categoria="romance">
+            <h2>A Moreninha</h2>
+            <p>
+              Um dos primeiros romances brasileiros, com tom romântico e juvenil.
+            </p>
+            <img
+              src="https://cdn.record.com.br/wp-content/uploads/2019/07/26024720/2986.jpeg"
+              alt="Capa do livro"
+            />
+            <div class="acoes">
+              <button class="btn favorito-btn" onclick="marcarFavorito(this)">
+                <span class="icon">⭐</span>
+                <span class="texto">Favoritar</span>
+              </button>
+
+              <button class="btn concluido-btn" onclick="marcarConcluido(this)">
+                <span class="icon">✅</span>
+                <span class="texto">Concluído</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="book-item" data-categoria="romance" data-destaque="true">
+            <h2>Orgulho e Preconceito</h2>
+            <p>Romance inglês sobre relações sociais e amor na era georgiana.</p>
+            <img
+              src="https://m.media-amazon.com/images/I/719esIW3D7L.jpg"
+              alt="Capa do livro"
+            />
+            <div class="acoes">
+              <button class="btn favorito-btn" onclick="marcarFavorito(this)">
+                <span class="icon">⭐</span>
+                <span class="texto">Favoritar</span>
+              </button>
+
+              <button class="btn concluido-btn" onclick="marcarConcluido(this)">
+                <span class="icon">✅</span>
+                <span class="texto">Concluído</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="book-item" data-categoria="drama" data-destaque="true">
+            <h2>Os Miseráveis</h2>
+            <p>
+              Obra épica sobre justiça, redenção e desigualdade social na França
+              do século XIX.
+            </p>
+            <img
+              src="https://m.media-amazon.com/images/I/71toOGz+DYL._UF1000,1000_QL80_.jpg"
+              alt="Capa do livro"
+            />
+            <div class="acoes">
+              <button class="btn favorito-btn" onclick="marcarFavorito(this)">
+                <span class="icon">⭐</span>
+                <span class="texto">Favoritar</span>
+              </button>
+
+              <button class="btn concluido-btn" onclick="marcarConcluido(this)">
+                <span class="icon">✅</span>
+                <span class="texto">Concluído</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="book-item" data-categoria="drama" data-destaque="true">
+            <h2>Crime e Castigo</h2>
+            <p>Romance psicológico profundo sobre culpa e redenção.</p>
+            <img
+              src="https://m.media-amazon.com/images/I/81+dpv22LGL._UF1000,1000_QL80_.jpg"
+              alt="Capa do livro"
+            />
+            <div class="acoes">
+              <button class="btn favorito-btn" onclick="marcarFavorito(this)">
+                <span class="icon">⭐</span>
+                <span class="texto">Favoritar</span>
+              </button>
+
+              <button class="btn concluido-btn" onclick="marcarConcluido(this)">
+                <span class="icon">✅</span>
+                <span class="texto">Concluído</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="book-item" data-categoria="realismo">
+            <h2>Frankenstein</h2>
+            <p>
+              Um clássico do gótico e da ficção científica, com reflexões sobre
+              ciência e ética.
+            </p>
+            <img
+              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTzl0lB8-nJTL6euVTM8AivdCicKWKEVtrPQw&s"
+              alt="Capa do livro"
+            />
+            <div class="acoes">
+              <button class="btn favorito-btn" onclick="marcarFavorito(this)">
+                <span class="icon">⭐</span>
+                <span class="texto">Favoritar</span>
+              </button>
+
+              <button class="btn concluido-btn" onclick="marcarConcluido(this)">
+                <span class="icon">✅</span>
+                <span class="texto">Concluído</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="book-item" data-categoria="romance" data-destaque="true">
+            <h2>Senhora</h2>
+            <p>
+              Romance urbano que explora casamento por interesse, amor e redenção.
+            </p>
+            <img
+              src="https://m.media-amazon.com/images/I/711tJRe6LML.jpg"
+              alt="Capa do livro"
+            />
+            <div class="acoes">
+              <button class="btn favorito-btn" onclick="marcarFavorito(this)">
+                <span class="icon">⭐</span>
+                <span class="texto">Favoritar</span>
+              </button>
+
+              <button class="btn concluido-btn" onclick="marcarConcluido(this)">
+                <span class="icon">✅</span>
+                <span class="texto">Concluído</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="book-item" data-categoria="realismo">
+            <h2>Quincas Borba</h2>
+            <p>
+              Continuação indireta de Memórias Póstumas, com críticas sociais e
+              filosofia irônica.
+            </p>
+            <img
+              src="https://m.media-amazon.com/images/I/61Kt3d+mhuL.jpg"
+              alt="Capa do livro"
+            />
+            <div class="acoes">
+              <button class="btn favorito-btn" onclick="marcarFavorito(this)">
+                <span class="icon">⭐</span>
+                <span class="texto">Favoritar</span>
+              </button>
+
+              <button class="btn concluido-btn" onclick="marcarConcluido(this)">
+                <span class="icon">✅</span>
+                <span class="texto">Concluído</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="book-item" data-categoria="realismo">
+            <h2>Triste Fim de Policarpo Quaresma</h2>
+            <p>Crítica ao nacionalismo exagerado e à burocracia brasileira.</p>
+            <img
+              src="https://m.media-amazon.com/images/I/71e5C8gV19L._UF1000,1000_QL80_.jpg"
+              alt="Capa do livro"
+            />
+            <div class="acoes">
+              <button class="btn favorito-btn" onclick="marcarFavorito(this)">
+                <span class="icon">⭐</span>
+                <span class="texto">Favoritar</span>
+              </button>
+
+              <button class="btn concluido-btn" onclick="marcarConcluido(this)">
+                <span class="icon">✅</span>
+                <span class="texto">Concluído</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="book-item" data-categoria="romance">
+            <h2>Lucíola</h2>
+            <p>
+              Romance urbano que narra a história de uma cortesã com tom moral e
+              religioso.
+            </p>
+            <img
+              src="https://m.media-amazon.com/images/I/617wC0u9UjL._UF1000,1000_QL80_.jpg"
+              alt="Capa do livro"
+            />
+            <div class="acoes">
+              <button class="btn favorito-btn" onclick="marcarFavorito(this)">
+                <span class="icon">⭐</span>
+                <span class="texto">Favoritar</span>
+              </button>
+
+              <button class="btn concluido-btn" onclick="marcarConcluido(this)">
+                <span class="icon">✅</span>
+                <span class="texto">Concluído</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="book-item" data-categoria="realismo">
+            <h2>Inocência</h2>
+            <p>Romance regionalista ambientado no interior do Brasil.</p>
+            <img
+              src="https://m.media-amazon.com/images/I/81j8ocnADUL._UF1000,1000_QL80_.jpg"
+              alt="Capa do livro"
+            />
+            <div class="acoes">
+              <button class="btn favorito-btn" onclick="marcarFavorito(this)">
+                <span class="icon">⭐</span>
+                <span class="texto">Favoritar</span>
+              </button>
+
+              <button class="btn concluido-btn" onclick="marcarConcluido(this)">
+                <span class="icon">✅</span>
+                <span class="texto">Concluído</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="book-item" data-categoria="realismo" data-destaque="true">
+            <h2>O Retrato de Dorian Gray</h2>
+            <p>Uma reflexão sobre beleza, juventude e moralidade.</p>
+            <img
+              src="https://m.media-amazon.com/images/I/91ZEEdj0cCL._UF1000,1000_QL80_.jpg"
+              alt="Capa do livro"
+            />
+            <div class="acoes">
+              <button class="btn favorito-btn" onclick="marcarFavorito(this)">
+                <span class="icon">⭐</span>
+                <span class="texto">Favoritar</span>
+              </button>
+
+              <button class="btn concluido-btn" onclick="marcarConcluido(this)">
+                <span class="icon">✅</span>
+                <span class="texto">Concluído</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="book-item" data-categoria="romance" data-destaque="true">
+            <h2>Drácula</h2>
+            <p>Um dos primeiros romances de terror moderno.</p>
+            <img
+              src="https://m.media-amazon.com/images/I/61MgodE1s0L._UF1000,1000_QL80_.jpg"
+              alt="Capa do livro"
+            />
+            <div class="acoes">
+              <button class="btn favorito-btn" onclick="marcarFavorito(this)">
+                <span class="icon">⭐</span>
+                <span class="texto">Favoritar</span>
+              </button>
+
+              <button class="btn concluido-btn" onclick="marcarConcluido(this)">
+                <span class="icon">✅</span>
+                <span class="texto">Concluído</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="book-item" data-categoria="drama">
+            <h2>A Letra Escarlate</h2>
+            <p>
+              Uma crítica social sobre adultério e puritanismo nos EUA do século
+              XVII.
+            </p>
+            <img
+              src="https://a-static.mlcdn.com.br/1500x1500/livro-a-letra-escarlate-nathaniel-hawthorne/livrdavila/850520/e0ae9abcc0543742de62327a12f8817f.jpeg"
+              alt="Capa do livro"
+            />
+            <div class="acoes">
+              <button class="btn favorito-btn" onclick="marcarFavorito(this)">
+                <span class="icon">⭐</span>
+                <span class="texto">Favoritar</span>
+              </button>
+
+              <button class="btn concluido-btn" onclick="marcarConcluido(this)">
+                <span class="icon">✅</span>
+                <span class="texto">Concluído</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="book-item" data-categoria="aventura">
+            <h2>Os Três Mosqueteiros</h2>
+            <p>Aventura e amizade na França do século XVII.</p>
+            <img
+              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQsd6Y1jTQIGixCv53q76F2d-JhcA8HCcRFWA&s"
+              alt="Capa do livro"
+            />
+          <div class="acoes">
+              <button class="btn favorito-btn" onclick="marcarFavorito(this)">
+                <span class="icon">⭐</span>
+                <span class="texto">Favoritar</span>
+              </button>
+
+              <button class="btn concluido-btn" onclick="marcarConcluido(this)">
+                <span class="icon">✅</span>
+                <span class="texto">Concluído</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="book-item" data-categoria="aventura">
+            <h2>A Volta ao Mundo em 80 Dias</h2>
+            <p>Romance de aventura e ficção científica.</p>
+            <img
+              src="https://www.lpm.com.br/livros/imagens/volta_ao_mundo_em_80_dias_9788525433664_hd.jpg"
+              alt="Capa do livro"
+            />
+            <div class="acoes">
+              <button class="btn favorito-btn" onclick="marcarFavorito(this)">
+                <span class="icon">⭐</span>
+                <span class="texto">Favoritar</span>
+              </button>
+
+              <button class="btn concluido-btn" onclick="marcarConcluido(this)">
+                <span class="icon">✅</span>
+                <span class="texto">Concluído</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer>
         <div class="footer-content">
           <div class="social-icons">
             <a href="https://instagram.com" target="_blank">
-              <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/instagram.svg" alt="Instagram">
+              <img
+                src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/instagram.svg"
+                alt="Instagram"
+              />
             </a>
             <a href="https://twitter.com" target="_blank">
-                <img src="https://s2-epocanegocios.glbimg.com/VdruDo5kfm-QpzbsHOYg1FvQNdc=/0x0:514x511/984x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_e536e40f1baf4c1a8bf1ed12d20577fd/internal_photos/bs/2023/t/6/znPU50SGCQI7YdhRwjUg/xa.jpg" alt="X (Twitter)">
-              </a>
+              <img
+                src="https://s2-epocanegocios.glbimg.com/VdruDo5kfm-QpzbsHOYg1FvQNdc=/0x0:514x511/984x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_e536e40f1baf4c1a8bf1ed12d20577fd/internal_photos/bs/2023/t/6/znPU50SGCQI7YdhRwjUg/xa.jpg"
+                alt="X (Twitter)"
+              />
+            </a>
             <a href="https://web.whatsapp.com/" target="_blank">
-              <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/whatsapp.svg" alt="WhatsApp">
+              <img
+                src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/whatsapp.svg"
+                alt="WhatsApp"
+              />
             </a>
           </div>
           <span>Copyright © 2025 TechRise</span>
         </div>
       </footer>
 
-<!-- conexão js -->
-<script src="index.js"></script>
-
-
-</body>
-</html>
+      <!-- conexão js -->
+      <script src="index.js"></script>
+    </body>
+  </html>
