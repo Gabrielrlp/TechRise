@@ -260,13 +260,15 @@ tr:nth-child(even) {
 }
 
 .tema-button{
-  margin: 66px 0px 0px 0px;
   display: flex;
+  margin: 25px 0px 0px 0px;
+  padding: 0;
 }
 
 .login-button{
   margin: 40px 0px 0px 0px;
   display: flex;
+  text-decoration: none;
 }
 
 @media (max-width: 768px) {

@@ -36,9 +36,11 @@ window.onscroll = function () {
   document.getElementById("btnTopo").style.display =
     document.documentElement.scrollTop > 100 ? "block" : "none";
 };
+
 function topo() {
   document.documentElement.scrollTop = 0;
 }
+
 function filtrarCategoria() {
   const categoriaSelecionada = document.getElementById("filtroCategoria").value;
   const livros = document.querySelectorAll(".book-item");
